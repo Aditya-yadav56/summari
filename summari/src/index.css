@@ -1,0 +1,805 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+@import "tailwindcss";
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-primary, #fafafa);
+    color: var(--text-primary, #1a1a1a);
+    cursor: none; /* Hide default cursor */
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+/* ── Global Scrollbar Hiding ── */
+*::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Hide cursor for common elements */
+button, a, input, select, textarea {
+    cursor: none !important;
+}
+
+@keyframes blurInUp {
+
+    from {
+        opacity: 0;
+        filter: blur(16px);
+        transform: translateY(28px);
+    }
+
+    to {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateY(0);
+    }
+}
+
+.animate-blur-in-up {
+    animation: blurInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Magazine Typography Tokens ── */
+:root {
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    
+    /* Theme Colors */
+    --bg-primary: #fafafa;
+    --text-primary: #1a1a1a;
+    --bg-glass: rgba(255, 255, 255, 0.55);
+    --bg-glass-hover: rgba(255, 255, 255, 0.65);
+    --border-glass: rgba(0, 0, 0, 0.08);
+    
+    --mag-gold: #c5a059;
+    --mag-black: #1a1a1a;
+    --mag-accent: #818cf8;
+}
+
+.dark {
+    --bg-primary: #0a0a0a;
+    --text-primary: #f5f5f5;
+    --bg-glass: rgba(20, 20, 20, 0.55);
+    --bg-glass-hover: rgba(30, 30, 30, 0.65);
+    --border-glass: rgba(255, 255, 255, 0.1);
+    
+    --mag-gold: #e5b05c;
+    --mag-black: #e0e0e0;
+    --mag-accent: #9aa5ff;
+}
+
+/* Disable the default fade in/out for view transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-group(root) {
+  animation: none;
+}
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+.mag-display-l {
+    font-family: var(--font-serif);
+    font-size: clamp(4rem, 15vw, 12rem);
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+}
+
+.mag-display-m {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 8vw, 6rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.mag-subtitle {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    color: var(--mag-gold);
+}
+
+.mag-accent-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--mag-accent);
+}
+
+.mag-stroke-text {
+    -webkit-text-stroke: 1px var(--mag-black);
+    color: transparent;
+}
+
+.mag-vertical-text {
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    font-weight: 600;
+    opacity: 0.5;
+}
+
+.mag-border-box {
+    border: 1px solid var(--mag-black);
+    padding: 1rem;
+}
+
+/* ── Hero Section ── */
+.hero-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    z-index: 1;
+}
+
+.hero-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    opacity: 0;
+    filter: blur(24px);
+    transform: translateY(36px);
+    transition:
+        opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 1s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-text-wrapper.hero-visible {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+}
+
+.hero-headline {
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.1;
+    white-space: nowrap;
+    position: relative;
+}
+
+/* blinking caret after typed text */
+.hero-cursor {
+    display: inline-block;
+    margin-left: 2px;
+    color: #818cf8;
+    animation: caretBlink 0.9s step-end infinite;
+    font-weight: 300;
+}
+
+@keyframes caretBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* ── Scribble Underline ── */
+.hero-underline-wrap {
+    width: 100%;
+    max-width: 640px;
+    margin-top: 6px;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(6px);
+    transition:
+        opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+}
+
+.hero-underline-wrap.underline-visible {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+}
+
+.hero-underline-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+}
+
+.hero-underline-path {
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+}
+
+.underline-visible .hero-underline-path {
+    animation: drawScribble 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.05s forwards;
+}
+
+@keyframes drawScribble {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   UPLOAD BOX
+═══════════════════════════════════════════════ */
+
+.ub-root {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(480px, 90vw);
+    height: 300px;
+    border-radius: 24px;
+    cursor: pointer;
+    outline: none;
+    overflow: visible;
+    /* glass surface */
+    background: var(--bg-glass);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    box-shadow:
+        0 0 0 1.5px rgba(167, 139, 250, 0.25),
+        0 8px 40px rgba(129, 140, 248, 0.10);
+    /* entrance */
+    opacity: 0;
+    filter: blur(14px);
+    transform: translateY(28px);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.9s,
+        filter 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.9s,
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.9s,
+        box-shadow 0.35s ease,
+        background 0.35s ease;
+    user-select: none;
+}
+
+.ub-root.ub-mounted {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+/* hover */
+.ub-root:hover {
+    box-shadow:
+        0 0 0 1.5px rgba(129, 140, 248, 0.5),
+        0 12px 56px rgba(129, 140, 248, 0.16);
+    background: var(--bg-glass-hover);
+}
+
+/* drag */
+.ub-root.ub-drag {
+    box-shadow:
+        0 0 0 2px rgba(124, 58, 237, 0.6),
+        0 0 0 6px rgba(124, 58, 237, 0.12),
+        0 16px 64px rgba(129, 140, 248, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    background: rgba(245, 243, 255, 0.75);
+    transform: scale(1.025);
+}
+
+/* processing */
+.ub-root.ub-processing {
+    cursor: default;
+}
+
+/* success */
+.ub-root.ub-success {
+    box-shadow:
+        0 0 0 1.5px rgba(124, 58, 237, 0.3),
+        0 8px 40px rgba(56, 189, 248, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    cursor: default;
+}
+
+/* error */
+.ub-root.ub-error {
+    box-shadow:
+        0 0 0 1.5px rgba(239, 68, 68, 0.4),
+        0 8px 48px rgba(239, 68, 68, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    animation: ubShake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+    cursor: default;
+}
+
+@keyframes ubShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    15% {
+        transform: translateX(-8px);
+    }
+
+    30% {
+        transform: translateX(7px);
+    }
+
+    45% {
+        transform: translateX(-6px);
+    }
+
+    60% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-3px);
+    }
+
+    90% {
+        transform: translateX(2px);
+    }
+}
+
+/* hidden file input */
+.ub-hidden-input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+/* ── Rotating dashed ring ── */
+.ub-ring {
+    position: absolute;
+    inset: -16px;
+    width: calc(100% + 32px);
+    height: calc(100% + 32px);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: ubRingSpin 18s linear infinite;
+}
+
+@keyframes ubRingSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Content wrapper ── */
+.ub-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 2;
+    padding: 16px;
+    text-align: center;
+}
+
+.ub-fade-in {
+    animation: ubFadeIn 0.35s ease both;
+}
+
+@keyframes ubFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ── Icon wrap (idle) ── */
+.ub-icon-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: ubIconFloat 3.2s ease-in-out infinite;
+}
+
+@keyframes ubIconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+.ub-glow {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.18) 0%, transparent 70%);
+    filter: blur(10px);
+    pointer-events: none;
+    animation: ubGlowPulse 3.2s ease-in-out infinite;
+}
+
+@keyframes ubGlowPulse {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* ── Text ── */
+.ub-title {
+    font-family: 'Geist', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #1e1b4b;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.ub-title--drag {
+    color: #6d28d9;
+    font-size: 1.1rem;
+}
+
+.ub-title--ok {
+    color: #1e1b4b;
+}
+
+.ub-title--err {
+    color: #b91c1c;
+}
+
+.ub-hint {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.ub-hint--err {
+    color: #ef4444;
+    font-size: 0.82rem;
+}
+
+.ub-link {
+    color: #7c3aed;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: rgba(124, 58, 237, 0.4);
+}
+
+.ub-pill {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: #7c3aed;
+    background: rgba(124, 58, 237, 0.08);
+    border: 1px solid rgba(124, 58, 237, 0.18);
+    letter-spacing: 0.02em;
+}
+
+/* ── Drop ring (drag state) ── */
+.ub-drop-ring {
+    animation: ubDropBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes ubDropBounce {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ── Spinner ── */
+.ub-spinner-wrap {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ub-spinner {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    animation: ubSpinnerSpin 1.4s linear infinite;
+}
+
+@keyframes ubSpinnerSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.ub-pct {
+    font-family: 'Geist', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #6d28d9;
+    position: relative;
+    z-index: 1;
+}
+
+.ub-fname {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    margin: 0;
+    max-width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* progress bar */
+.ub-track {
+    width: 220px;
+    height: 4px;
+    border-radius: 99px;
+    background: #e2e8f0;
+    overflow: hidden;
+}
+
+.ub-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #7c3aed, #0ea5e9);
+    transition: width 0.25s ease;
+    box-shadow: 0 0 8px rgba(124, 58, 237, 0.4);
+}
+
+/* ── Checkmark path draw ── */
+.ub-check {
+    animation: ubCheckPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes ubCheckPop {
+    from {
+        opacity: 0;
+        transform: scale(0.5) rotate(-8deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.ub-checkmark-path {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: ubCheckDraw 0.5s ease 0.3s forwards;
+}
+
+@keyframes ubCheckDraw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* ── File card ── */
+.ub-file-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(249, 250, 251, 0.8);
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    border-radius: 14px;
+    padding: 10px 14px;
+    max-width: 300px;
+    width: 100%;
+    box-shadow: 0 2px 12px rgba(129, 140, 248, 0.08);
+    backdrop-filter: blur(8px);
+}
+
+.ub-file-meta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+}
+
+.ub-file-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #1e1b4b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ub-file-size {
+    font-size: 0.72rem;
+    color: #94a3b8;
+}
+
+.ub-remove {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(239, 68, 68, 0.08);
+    color: #ef4444;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.ub-remove:hover {
+    background: rgba(239, 68, 68, 0.16);
+    transform: scale(1.1);
+}
+
+/* ── CTA button ── */
+.ub-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 24px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #7c3aed 0%, #0ea5e9 100%);
+    color: white;
+    font-family: 'Geist', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35), 0 0 0 0 rgba(124, 58, 237, 0);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.ub-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0);
+    transition: background 0.2s;
+    border-radius: inherit;
+}
+
+.ub-cta:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.45), 0 0 0 4px rgba(124, 58, 237, 0.12);
+}
+
+.ub-cta:hover::after {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.ub-cta:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* ── Error icon ── */
+.ub-error-icon {
+    animation: ubErrorPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes ubErrorPop {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ── Particles ── */
+.ub-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ub-particle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: hsl(calc(200 + var(--i) * 14), 80%, 65%);
+    opacity: 0;
+    transform: translate(-50%, -50%);
+}
+
+.ub-particles--on .ub-particle {
+    animation: ubParticleBurst 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(var(--i) * 0.06s) infinite;
+}
+
+@keyframes ubParticleBurst {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.4);
+    }
+
+    30% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(calc(-50% + cos(calc(var(--i) * 25.7deg)) * 80px),
+                calc(-50% + sin(calc(var(--i) * 25.7deg)) * 80px)) scale(0.2);
+    }
+}
+
+/* ── Container for UploadBox ── */
+.ub-container {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(10px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 1.2s;
+    /* delay until hero text starts settling */
+}
+
+.ub-container--visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}

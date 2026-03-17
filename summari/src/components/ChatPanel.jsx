@@ -105,25 +105,25 @@ const containerStyle = {
 };
 
 const headerStyle = {
-    padding: '16px 20px',
+    padding: '12px 16px',
     borderBottom: '1px solid var(--border-glass)',
     background: 'var(--bg-glass)'
 };
 
 const titleStyle = {
-    fontSize: '14px',
-    fontWeight: '600',
+    fontSize: '12px',
+    fontWeight: '700',
     color: 'var(--text-primary)',
     margin: 0
 };
 
 const chatBodyStyle = {
     flex: 1,
-    padding: '20px',
+    padding: '16px',
     overflowY: 'auto',
     display: 'flex',
     flexDirection: 'column',
-    gap: '16px'
+    gap: '12px'
 };
 
 const msgWrapperStyle = (isUser) => ({
@@ -135,9 +135,9 @@ const msgWrapperStyle = (isUser) => ({
 });
 
 const avatarStyle = (isUser) => ({
-    width: '28px',
-    height: '28px',
-    borderRadius: '8px',
+    width: '24px',
+    height: '24px',
+    borderRadius: '6px',
     background: isUser ? 'var(--text-primary)' : 'var(--bg-glass)',
     color: isUser ? 'var(--bg-primary)' : 'var(--text-primary)',
     display: 'flex',
@@ -148,18 +148,18 @@ const avatarStyle = (isUser) => ({
 
 const bubbleStyle = (isUser) => ({
     maxWidth: '85%',
-    padding: '10px 14px',
-    borderRadius: isUser ? '16px 4px 16px 16px' : '4px 16px 16px 16px',
+    padding: '8px 12px',
+    borderRadius: isUser ? '14px 4px 14px 14px' : '4px 14px 14px 14px',
     background: isUser ? 'var(--text-primary)' : 'var(--bg-glass)',
     color: isUser ? 'var(--bg-primary)' : 'var(--text-primary)',
-    fontSize: '14px',
-    lineHeight: '1.5',
+    fontSize: '13px',
+    lineHeight: '1.4',
     boxShadow: isUser ? '0 4px 12px rgba(0, 0, 0, 0.1)' : 'none',
     border: isUser ? 'none' : '1px solid var(--border-glass)'
 });
 
 const inputAreaStyle = {
-    padding: '16px',
+    padding: '12px',
     borderTop: '1px solid var(--border-glass)',
     background: 'var(--bg-primary)'
 };
@@ -180,9 +180,9 @@ const inputStyle = {
     border: 'none',
     background: 'none',
     outline: 'none',
-    fontSize: '14px',
+    fontSize: '13px',
     color: 'var(--text-primary)',
-    padding: '8px 0'
+    padding: '6px 0'
 };
 
 const sendBtnStyle = {

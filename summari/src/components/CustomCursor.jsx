@@ -104,6 +104,7 @@ export default function CustomCursor() {
         <>
             <div
                 ref={cursorRef}
+                className="custom-cursor-container"
                 style={{
                     position: 'fixed',
                     top: 0,
@@ -138,6 +139,7 @@ export default function CustomCursor() {
 
             <div
                 ref={dotRef}
+                className="custom-cursor-dot"
                 style={{
                     position: 'fixed',
                     top: 0,
@@ -154,13 +156,25 @@ export default function CustomCursor() {
             />
 
             <style>{`
-                body, a, button, input, select, textarea {
-                    cursor: none !important;
+                /* Hide custom cursor on mobile/touch devices */
+                @media (hover: none) and (pointer: coarse) {
+                    .custom-cursor-container, .custom-cursor-dot {
+                        display: none !important;
+                    }
+                    body, a, button, input, select, textarea {
+                        cursor: auto !important;
+                    }
                 }
-                
-                a:hover, button:hover {
-                    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                    transform: scale(1.05);
+
+                @media (hover: hover) {
+                    body, a, button, input, select, textarea {
+                        cursor: none !important;
+                    }
+                    
+                    a:hover, button:hover {
+                        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                        transform: scale(1.05);
+                    }
                 }
             `}</style>
         </>

@@ -161,10 +161,10 @@ export default function Dashboard() {
             <LiquidBackground />
 
             {/* Header */}
-            <header style={{ height: '74px', background: 'var(--bg-glass)', backdropFilter: 'blur(20px)', borderBottom: '1px solid var(--border-glass)', zIndex: 100, display: 'flex', alignItems: 'center', padding: '0 32px', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <header style={{ height: '54px', background: 'var(--bg-glass)', backdropFilter: 'blur(20px)', borderBottom: '1px solid var(--border-glass)', zIndex: 100, display: 'flex', alignItems: 'center', padding: '0 20px', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <button onClick={() => navigate('/')} style={headerBtnStyle}><ArrowLeft size={16} /></button>
-                    <span style={{ fontSize: '20px', fontWeight: '900', fontFamily: 'var(--font-serif)', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>SUMMARI.</span>
+                    <span style={{ fontSize: '16px', fontWeight: '900', fontFamily: 'var(--font-serif)', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>SUMMARI.</span>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -199,8 +199,8 @@ export default function Dashboard() {
             )}
 
             <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
-                <main style={{ flex: 1, overflowY: 'auto', padding: '60px 40px', position: 'relative', zIndex: 10 }}>
-                    <div ref={summaryRef} style={{ ...summaryCardStyle, width: '100%', maxWidth: '850px', margin: '0 auto' }}>
+                <main style={{ flex: 1, overflowY: 'auto', padding: '32px 24px', position: 'relative', zIndex: 10 }}>
+                    <div ref={summaryRef} style={{ ...summaryCardStyle, width: '100%', maxWidth: '680px', margin: '0 auto' }}>
                         {isComparison ? (
                             <div style={{ textAlign: 'left' }}>
                                 <h1 style={titleStyle}>Comparison Report</h1>
@@ -226,7 +226,7 @@ export default function Dashboard() {
                             </div>
                         ) : (
                             <>
-                                <h1 style={{ ...titleStyle, fontFamily: 'var(--font-serif)', fontSize: '56px' }}>{localSummary.title}</h1>
+                                <h1 style={{ ...titleStyle, fontFamily: 'var(--font-serif)', fontSize: '28px' }}>{localSummary.title}</h1>
                                 
                                 <div style={{ position: 'relative', marginBottom: '40px' }}>
                                     <input 
@@ -431,16 +431,16 @@ export default function Dashboard() {
     )
 }
 
-const headerBtnStyle = { width: '40px', height: '40px', borderRadius: '12px', background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-primary)' }
-const audioBtnStyle = (active) => ({ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px', borderRadius: '12px', background: active ? 'var(--text-primary)' : 'var(--bg-glass)', color: active ? 'var(--bg-primary)' : 'var(--text-primary)', border: '1px solid var(--border-glass)', fontWeight: '700', fontSize: '13px', cursor: 'pointer', transition: 'all 0.3s' })
-const tabBtnStyle = (active) => ({ padding: '8px 16px', borderRadius: '8px', border: 'none', background: active ? 'var(--text-primary)' : 'transparent', color: active ? 'var(--bg-primary)' : '#94a3b8', fontSize: '11px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.05em', cursor: 'pointer', boxShadow: active ? '0 2px 8px rgba(0,0,0,0.05)' : 'none' })
-const summaryCardStyle = { width: '100%', maxWidth: '850px', margin: '0 auto', background: 'var(--bg-glass)', borderRadius: '40px', padding: '80px', boxShadow: '0 40px 100px rgba(0,0,0,0.02)', border: '1px solid var(--border-glass)' }
-const titleStyle = { fontSize: '48px', fontWeight: '900', letterSpacing: '-0.04em', lineHeight: '1.1', marginBottom: '32px' }
-const overviewStyle = { fontSize: '20px', lineHeight: '1.8' }
-const sectionTitleStyle = { fontSize: '12px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.3em', color: 'var(--mag-gold)', marginBottom: '40px', borderBottom: '1px solid var(--border-glass)', paddingBottom: '12px' }
-const topicStyle = { padding: '40px', borderRadius: '24px', background: 'rgba(128, 128, 128, 0.05)', border: '1px solid var(--border-glass)' }
-const topicNameStyle = { fontSize: '20px', fontWeight: '800', marginBottom: '12px' }
-const topicDescStyle = { fontSize: '16px', lineHeight: '1.7', color: 'inherit', opacity: 0.8 }
-const insightsCardStyle = { display: 'flex', flexDirection: 'column', gap: '16px' }
-const insightRowStyle = { padding: '24px', borderRadius: '20px', background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', display: 'flex', gap: '20px', alignItems: 'center' }
-const sidebarStyle = (isOpen) => ({ width: isOpen ? '500px' : '0px', background: 'var(--bg-glass)', borderLeft: isOpen ? '1px solid var(--border-glass)' : 'none', transition: 'width 0.6s cubic-bezier(0.85, 0, 0.15, 1)', overflow: 'hidden', position: 'relative', height: '100%' })
+const headerBtnStyle = { width: '32px', height: '32px', borderRadius: '8px', background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-primary)' }
+const audioBtnStyle = (active) => ({ display: 'flex', alignItems: 'center', gap: '4px', padding: '6px 12px', borderRadius: '8px', background: active ? 'var(--text-primary)' : 'var(--bg-glass)', color: active ? 'var(--bg-primary)' : 'var(--text-primary)', border: '1px solid var(--border-glass)', fontWeight: '700', fontSize: '11px', cursor: 'pointer', transition: 'all 0.3s' })
+const tabBtnStyle = (active) => ({ padding: '5px 10px', borderRadius: '6px', border: 'none', background: active ? 'var(--text-primary)' : 'transparent', color: active ? 'var(--bg-primary)' : '#94a3b8', fontSize: '10px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.05em', cursor: 'pointer', boxShadow: active ? '0 2px 8px rgba(0,0,0,0.05)' : 'none' })
+const summaryCardStyle = { width: '100%', maxWidth: '680px', margin: '0 auto', background: 'var(--bg-glass)', borderRadius: '24px', padding: '40px', boxShadow: '0 40px 100px rgba(0,0,0,0.02)', border: '1px solid var(--border-glass)' }
+const titleStyle = { fontSize: '28px', fontWeight: '900', letterSpacing: '-0.04em', lineHeight: '1.1', marginBottom: '16px' }
+const overviewStyle = { fontSize: '15px', lineHeight: '1.7' }
+const sectionTitleStyle = { fontSize: '10px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.3em', color: 'var(--mag-gold)', marginBottom: '24px', borderBottom: '1px solid var(--border-glass)', paddingBottom: '8px' }
+const topicStyle = { padding: '24px', borderRadius: '16px', background: 'rgba(128, 128, 128, 0.05)', border: '1px solid var(--border-glass)' }
+const topicNameStyle = { fontSize: '16px', fontWeight: '800', marginBottom: '8px' }
+const topicDescStyle = { fontSize: '13px', lineHeight: '1.7', color: 'inherit', opacity: 0.8 }
+const insightsCardStyle = { display: 'flex', flexDirection: 'column', gap: '10px' }
+const insightRowStyle = { padding: '16px', borderRadius: '14px', background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', display: 'flex', gap: '12px', alignItems: 'center' }
+const sidebarStyle = (isOpen) => ({ width: isOpen ? '350px' : '0px', background: 'var(--bg-glass)', borderLeft: isOpen ? '1px solid var(--border-glass)' : 'none', transition: 'width 0.6s cubic-bezier(0.85, 0, 0.15, 1)', overflow: 'hidden', position: 'relative', height: '100%' })

@@ -149,23 +149,23 @@ export default function Quiz() {
             </div>
 
             {/* Header */}
-            <header ref={headerRef} style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '80px', background: 'var(--bg-glass)', backdropFilter: 'blur(20px)', zIndex: 100, display: 'flex', alignItems: 'center', padding: '0 40px', borderBottom: '1px solid var(--border-glass)', justifyContent: 'space-between' }}>
-                <button onClick={() => navigate(-1)} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', padding: '10px 16px', borderRadius: '12px', cursor: 'pointer', fontWeight: '700', color: 'var(--text-primary)' }}>
-                    <ArrowLeft size={16} /> Exit Quiz
+            <header ref={headerRef} style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '60px', background: 'var(--bg-glass)', backdropFilter: 'blur(20px)', zIndex: 100, display: 'flex', alignItems: 'center', padding: '0 24px', borderBottom: '1px solid var(--border-glass)', justifyContent: 'space-between' }}>
+                <button onClick={() => navigate(-1)} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', padding: '8px 12px', borderRadius: '10px', cursor: 'pointer', fontWeight: '700', color: 'var(--text-primary)', fontSize: '13px' }}>
+                    <ArrowLeft size={14} /> Exit Quiz
                 </button>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <BrainCircuit className="text-indigo-500" />
-                    <span style={{ fontSize: '20px', fontWeight: '900', letterSpacing: '-0.02em' }}>Intelligence Check</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <BrainCircuit className="text-indigo-500" size={20} />
+                    <span style={{ fontSize: '16px', fontWeight: '900', letterSpacing: '-0.02em' }}>Intelligence Check</span>
                 </div>
-                <div style={{ fontWeight: '800', background: 'var(--bg-glass)', padding: '8px 16px', borderRadius: '12px', color: 'var(--text-primary)', opacity: 0.7 }}>
-                    Answered: {Object.keys(answers).length} / {quizData.length}
+                <div style={{ fontWeight: '800', background: 'var(--bg-glass)', padding: '6px 12px', borderRadius: '10px', color: 'var(--text-primary)', opacity: 0.7, fontSize: '12px' }}>
+                    {Object.keys(answers).length} / {quizData.length}
                 </div>
             </header>
 
-            <main style={{ position: 'relative', zIndex: 10, maxWidth: '800px', margin: '0 auto', paddingTop: '140px' }}>
+            <main style={{ position: 'relative', zIndex: 10, maxWidth: '680px', margin: '0 auto', paddingTop: '100px' }}>
                 
                 {!isFinished ? (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '80px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
                         {quizData.map((q, qIndex) => {
                             const isAnswered = answers[qIndex] !== undefined;
                             
@@ -176,8 +176,8 @@ export default function Quiz() {
                                     style={{ 
                                         background: 'var(--bg-glass)', 
                                         backdropFilter: 'blur(20px)',
-                                        borderRadius: '32px', 
-                                        padding: '48px', 
+                                        borderRadius: '24px', 
+                                        padding: '32px', 
                                         boxShadow: '0 20px 40px rgba(0,0,0,0.03)',
                                         border: '1px solid var(--border-glass)',
                                         opacity: isAnswered ? 0.6 : 1,
@@ -186,11 +186,11 @@ export default function Quiz() {
                                         color: 'var(--text-primary)'
                                     }}
                                 >
-                                    <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', alignItems: 'center' }}>
-                                        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '50%', background: '#818cf8', color: 'white', fontWeight: '900', fontSize: '14px' }}>
+                                    <div style={{ display: 'flex', gap: '12px', marginBottom: '16px', alignItems: 'center' }}>
+                                        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '50%', background: '#818cf8', color: 'white', fontWeight: '900', fontSize: '12px' }}>
                                             {qIndex + 1}
                                         </span>
-                                        <h3 style={{ fontSize: '24px', fontWeight: '800', lineHeight: '1.4' }}>{q.question}</h3>
+                                        <h3 style={{ fontSize: '18px', fontWeight: '800', lineHeight: '1.4' }}>{q.question}</h3>
                                     </div>
 
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -228,12 +228,12 @@ export default function Quiz() {
                                                         alignItems: 'center',
                                                         justifyContent: 'space-between',
                                                         width: '100%',
-                                                        padding: '20px 24px',
-                                                        borderRadius: '16px',
+                                                        padding: '14px 20px',
+                                                        borderRadius: '12px',
                                                         background: bg,
                                                         border: border,
                                                         color: color,
-                                                        fontSize: '16px',
+                                                        fontSize: '14px',
                                                         fontWeight: '600',
                                                         textAlign: 'left',
                                                         cursor: isAnswered ? 'default' : 'pointer',
@@ -264,8 +264,8 @@ export default function Quiz() {
                                     
                                     {isAnswered && (
                                         <div style={{ marginTop: '24px', padding: '20px', borderRadius: '16px', background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', display: 'flex', gap: '12px' }}>
-                                            <Sparkles size={20} className={answers[qIndex] === q.correctIndex ? "text-emerald-500" : "text-orange-400"} style={{ flexShrink: 0, marginTop: '2px' }} />
-                                            <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--text-primary)', opacity: 0.8, fontWeight: '500' }}>
+                                            <Sparkles size={16} className={answers[qIndex] === q.correctIndex ? "text-emerald-500" : "text-orange-400"} style={{ flexShrink: 0, marginTop: '2px' }} />
+                                            <p style={{ fontSize: '13px', lineHeight: '1.6', color: 'var(--text-primary)', opacity: 0.8, fontWeight: '500' }}>
                                                 <span style={{ fontWeight: '800', color: answers[qIndex] === q.correctIndex ? '#10b981' : '#f59e0b' }}>Explanation: </span> 
                                                 {q.explanation}
                                             </p>
@@ -279,7 +279,7 @@ export default function Quiz() {
                             <div style={{ textAlign: 'center', padding: '40px 0' }}>
                                 <button 
                                     onClick={handleFinish}
-                                    style={{ padding: '20px 48px', fontSize: '18px', fontWeight: '900', background: 'linear-gradient(135deg, #818cf8 0%, #c084fc 100%)', color: 'white', border: 'none', borderRadius: '24px', cursor: 'pointer', boxShadow: '0 20px 40px rgba(139, 92, 246, 0.3)', transition: 'all 0.3s' }}
+                                    style={{ padding: '16px 32px', fontSize: '15px', fontWeight: '900', background: 'linear-gradient(135deg, #818cf8 0%, #c084fc 100%)', color: 'white', border: 'none', borderRadius: '16px', cursor: 'pointer', boxShadow: '0 20px 40px rgba(139, 92, 246, 0.3)', transition: 'all 0.3s' }}
                                     onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-4px)'}
                                     onMouseLeave={(e) => e.currentTarget.style.transform = 'none'}
                                 >
@@ -291,19 +291,19 @@ export default function Quiz() {
                 ) : (
                     // Review Screen
                     <div style={{ animation: 'fadeIn 0.5s ease-out' }}>
-                        <div style={{ background: 'var(--bg-glass)', borderRadius: '40px', padding: '60px', textAlign: 'center', boxShadow: '0 40px 100px rgba(0,0,0,0.05)', marginBottom: '40px', position: 'relative', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
+                        <div style={{ background: 'var(--bg-glass)', borderRadius: '24px', padding: '40px', textAlign: 'center', boxShadow: '0 40px 100px rgba(0,0,0,0.05)', marginBottom: '32px', position: 'relative', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
                             <div style={{ position: 'absolute', top: '-100px', left: '-100px', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(129,140,248,0.2) 0%, transparent 70%)', borderRadius: '50%' }}></div>
                             <div style={{ position: 'absolute', bottom: '-100px', right: '-100px', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(192,132,252,0.2) 0%, transparent 70%)', borderRadius: '50%' }}></div>
                             
-                            <Trophy size={80} className="text-yellow-400 mx-auto mb-6 drop-shadow-lg" />
-                            <h1 style={{ fontSize: '48px', fontWeight: '900', letterSpacing: '-0.04em', marginBottom: '12px' }}>Quiz Complete!</h1>
-                            <p style={{ fontSize: '20px', color: 'var(--text-primary)', opacity: 0.6, fontWeight: '600' }}>You scored {score} out of {quizData.length}</p>
+                            <Trophy size={48} className="text-yellow-400 mx-auto mb-4 drop-shadow-lg" />
+                            <h1 style={{ fontSize: '32px', fontWeight: '900', letterSpacing: '-0.04em', marginBottom: '8px' }}>Quiz Complete!</h1>
+                            <p style={{ fontSize: '16px', color: 'var(--text-primary)', opacity: 0.6, fontWeight: '600' }}>You scored {score} out of {quizData.length}</p>
                             
-                            <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'center', gap: '16px' }}>
-                                <button onClick={() => window.location.reload()} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 24px', background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', borderRadius: '16px', fontWeight: '700', cursor: 'pointer', color: 'var(--text-primary)' }}>
-                                    <RefreshCcw size={16} /> Retake Quiz
+                            <div style={{ marginTop: '32px', display: 'flex', justifyContent: 'center', gap: '12px' }}>
+                                <button onClick={() => window.location.reload()} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px', background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', borderRadius: '12px', fontWeight: '700', cursor: 'pointer', color: 'var(--text-primary)', fontSize: '14px' }}>
+                                    <RefreshCcw size={14} /> Retake Quiz
                                 </button>
-                                <button onClick={() => navigate(-1)} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 24px', background: 'var(--text-primary)', color: 'var(--bg-primary)', borderRadius: '16px', fontWeight: '700', border: 'none', cursor: 'pointer' }}>
+                                <button onClick={() => navigate(-1)} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px', background: 'var(--text-primary)', color: 'var(--bg-primary)', borderRadius: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', fontSize: '14px' }}>
                                     Return to Dashboard
                                 </button>
                             </div>
@@ -314,11 +314,11 @@ export default function Quiz() {
                             {quizData.map((q, i) => {
                                 const didGetRight = answers[i] === q.correctIndex;
                                 return (
-                                <div key={i} className="review-card" style={{ background: 'var(--bg-glass)', padding: '32px', borderRadius: '24px', border: '1px solid var(--border-glass)', position: 'relative' }}>
-                                        <div style={{ position: 'absolute', top: '32px', right: '32px' }}>
-                                            {didGetRight ? <CheckCircle2 size={32} className="text-emerald-500" /> : <XCircle size={32} className="text-red-500" />}
+                                <div key={i} className="review-card" style={{ background: 'var(--bg-glass)', padding: '24px', borderRadius: '20px', border: '1px solid var(--border-glass)', position: 'relative' }}>
+                                        <div style={{ position: 'absolute', top: '24px', right: '24px' }}>
+                                            {didGetRight ? <CheckCircle2 size={24} className="text-emerald-500" /> : <XCircle size={24} className="text-red-500" />}
                                         </div>
-                                        <h3 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '16px', paddingRight: '40px' }}>{i + 1}. {q.question}</h3>
+                                        <h3 style={{ fontSize: '15px', fontWeight: '800', marginBottom: '12px', paddingRight: '40px' }}>{i + 1}. {q.question}</h3>
                                         
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
                                             <div>
@@ -333,8 +333,8 @@ export default function Quiz() {
                                             )}
                                         </div>
 
-                                        <div style={{ background: 'var(--bg-primary)', padding: '16px', borderRadius: '12px', border: '1px solid var(--border-glass)' }}>
-                                            <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--text-primary)', opacity: 0.8 }}>
+                                        <div style={{ background: 'var(--bg-primary)', padding: '12px', borderRadius: '10px', border: '1px solid var(--border-glass)' }}>
+                                            <p style={{ fontSize: '12px', lineHeight: '1.6', color: 'var(--text-primary)', opacity: 0.8 }}>
                                                 <span style={{ fontWeight: '700' }}>Explanation:</span> {q.explanation}
                                             </p>
                                         </div>

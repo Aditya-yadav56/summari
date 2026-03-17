@@ -37,7 +37,7 @@ export default function HeroSection() {
     }, [])
 
     return (
-        <section className="hero-section" style={{ minHeight: '100vh', padding: '2rem' }}>
+        <section className="hero-section" style={{ minHeight: '100vh', padding: '0.75rem' }}>
             {/* Magazine Background Title */}
             <div 
                 className={`absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden ${visible ? 'opacity-10' : 'opacity-0'}`}
@@ -48,10 +48,10 @@ export default function HeroSection() {
                 </h1>
             </div>
 
-            <div className={`relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-12 ${visible ? 'hero-visible' : 'opacity-0'}`} style={{ transition: 'all 1s ease' }}>
+            <div className={`relative z-10 w-full max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6 ${visible ? 'hero-visible' : 'opacity-0'}`} style={{ transition: 'all 1s ease' }}>
                 
                 {/* Left Side: Headline & Metadata */}
-                <div className="flex flex-col gap-8 md:w-1/2">
+                <div className="flex flex-col gap-4 md:w-1/2">
                     <div className="flex flex-col gap-2">
                         <span className="mag-subtitle animate-blur-in-up" style={{ animationDelay: '0.2s' }}>
                             The Art of Compression — Vol. 01
@@ -74,11 +74,11 @@ export default function HeroSection() {
                     <div className="flex gap-12 mt-4 animate-blur-in-up" style={{ animationDelay: '0.8s' }}>
                         <div className="flex flex-col">
                             <span className="text-xs font-bold uppercase tracking-tighter">Edition</span>
-                            <span className="font-serif italic text-xl">2026 / MAR</span>
+                            <span className="font-serif italic text-lg">2026 / MAR</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xs font-bold uppercase tracking-tighter">Typeface</span>
-                            <span className="font-serif italic text-xl">Display Serif</span>
+                            <span className="font-serif italic text-lg">Display Serif</span>
                         </div>
                     </div>
                 </div>

@@ -53,7 +53,7 @@ export default function AuthModal() {
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 transition-all duration-300">
       <div 
-        className="relative w-full max-w-md border shadow-2xl rounded-3xl overflow-hidden p-8 animate-blur-in-up"
+        className="relative w-full max-w-[360px] border shadow-2xl rounded-[24px] overflow-hidden p-6 animate-blur-in-up"
         style={{ background: 'var(--bg-primary)', borderColor: 'var(--border-glass)' }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -65,27 +65,27 @@ export default function AuthModal() {
           <X size={20} />
         </button>
 
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-black tracking-tight" style={{ fontFamily: "var(--font-serif)", color: 'var(--text-primary)' }}>
+        <div className="text-center mb-6">
+          <h2 className="text-lg font-black tracking-tight" style={{ fontFamily: "var(--font-serif)", color: 'var(--text-primary)' }}>
             {isLogin ? "Welcome Back" : "Create Account"}
           </h2>
-          <p className="text-sm mt-2 opacity-60" style={{ color: 'var(--text-primary)' }}>
-            {isLogin ? "Enter your details to sign in to your account." : "Join us to save your summaries securely."}
+          <p className="text-xs mt-1.5 opacity-60" style={{ color: 'var(--text-primary)' }}>
+            {isLogin ? "Enter your details to sign in." : "Join us to save your summaries."}
           </p>
         </div>
 
         {error && (
-          <div className="mb-6 flex items-start gap-3 bg-red-50 text-red-600 p-4 rounded-xl text-sm border border-red-100">
-            <AlertCircle size={18} className="shrink-0 mt-0.5" />
+          <div className="mb-4 flex items-start gap-2 bg-red-50 text-red-600 p-3 rounded-xl text-xs border border-red-100">
+            <AlertCircle size={14} className="shrink-0 mt-0.5" />
             <p>{error}</p>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                <Mail size={18} />
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                <Mail size={16} />
               </div>
               <input
                 type="email"
@@ -93,7 +93,7 @@ export default function AuthModal() {
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 border rounded-xl outline-none transition-all"
+                className="w-full pl-10 pr-4 py-2.5 border rounded-xl outline-none transition-all text-sm"
                 style={{ background: 'var(--bg-glass)', borderColor: 'var(--border-glass)', color: 'var(--text-primary)' }}
               />
             </div>
@@ -101,8 +101,8 @@ export default function AuthModal() {
 
           <div>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                <Lock size={18} />
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                <Lock size={16} />
               </div>
               <input
                 type="password"
@@ -110,7 +110,7 @@ export default function AuthModal() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 border rounded-xl outline-none transition-all"
+                className="w-full pl-10 pr-4 py-2.5 border rounded-xl outline-none transition-all text-sm"
                 style={{ background: 'var(--bg-glass)', borderColor: 'var(--border-glass)', color: 'var(--text-primary)' }}
               />
             </div>
@@ -119,7 +119,7 @@ export default function AuthModal() {
           <button 
             type="submit" 
             disabled={loading}
-            className="w-full py-3.5 rounded-xl font-medium tracking-wide transition-all disabled:opacity-70 flex items-center justify-center shadow-lg"
+            className="w-full py-3 rounded-xl font-bold tracking-wide transition-all disabled:opacity-70 flex items-center justify-center shadow-lg text-sm"
             style={{ background: 'var(--text-primary)', color: 'var(--bg-primary)' }}
           >
             {loading ? (
@@ -130,17 +130,17 @@ export default function AuthModal() {
           </button>
         </form>
 
-        <div className="mt-6 flex items-center gap-4">
-          <div className="flex-1 h-px bg-gray-200"></div>
-          <span className="text-xs font-semibold text-gray-400 tracking-wider uppercase">Or continue with</span>
-          <div className="flex-1 h-px bg-gray-200"></div>
+        <div className="mt-5 flex items-center gap-3">
+          <div className="flex-1 h-px bg-gray-100"></div>
+          <span className="text-[10px] font-bold text-gray-400 tracking-wider uppercase">Or continue with</span>
+          <div className="flex-1 h-px bg-gray-100"></div>
         </div>
 
         <button 
           type="button"
           onClick={handleGoogleSignIn}
           disabled={loading}
-          className="mt-6 w-full py-3.5 border rounded-xl font-medium flex items-center justify-center gap-3 transition-all"
+          className="mt-5 w-full py-2.5 border rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all"
           style={{ background: 'var(--bg-glass)', borderColor: 'var(--border-glass)', color: 'var(--text-primary)' }}
         >
           <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -152,7 +152,7 @@ export default function AuthModal() {
           Continue with Google
         </button>
 
-        <div className="mt-8 text-center text-sm opacity-60" style={{ color: 'var(--text-primary)' }}>
+        <div className="mt-6 text-center text-xs opacity-60" style={{ color: 'var(--text-primary)' }}>
           {isLogin ? "Don't have an account? " : "Already have an account? "}
           <button 
             type="button"

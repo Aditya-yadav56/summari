@@ -14,21 +14,21 @@ const Home = () => {
       <LiquidBackground />
 
       {/* Magazine Header / Logo */}
-      <header className="fixed top-0 left-0 right-0 z-50 p-8 flex justify-between items-start pointer-events-none">
+      <header className="fixed top-0 left-0 right-0 z-50 p-3 flex justify-between items-start pointer-events-none">
         <span
-          className="animate-blur-in-up text-3xl font-black tracking-tighter select-none cursor-pointer pointer-events-auto"
+          className="animate-blur-in-up text-xl font-black tracking-tighter select-none cursor-pointer pointer-events-auto"
           style={{ fontFamily: "var(--font-serif)", animationDelay: '0.1s', color: 'var(--text-primary)' }}
         >
           SUMMARI.
         </span>
         
-        <div className="animate-blur-in-up flex flex-col items-end pointer-events-auto gap-4" style={{ animationDelay: '0.3s' }}>
+        <div className="animate-blur-in-up flex flex-col items-end pointer-events-auto gap-2" style={{ animationDelay: '0.3s' }}>
           <div className="flex flex-col items-end" style={{ color: 'var(--text-primary)' }}>
             <span className="text-[10px] font-bold tracking-[0.4em] uppercase opacity-40">Privacy First</span>
             <span className="text-[10px] font-bold tracking-[0.4em] uppercase opacity-40">AI Powered</span>
           </div>
           
-          <div className="flex items-center gap-3 mt-2">
+          <div className="flex items-center gap-2 mt-2">
             {currentUser ? (
               <div className="flex items-center gap-4 backdrop-blur-md px-4 py-2 rounded-full border shadow-sm" style={{ background: 'var(--bg-glass)', borderColor: 'var(--border-glass)', color: 'var(--text-primary)' }}>
                 <div className="flex items-center gap-2">

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, User, Bot, Loader2, Sparkles } from 'lucide-react';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../api/api';
 
 export default function ChatPanel({ documentText }) {
     const [messages, setMessages] = useState([
@@ -27,7 +28,7 @@ export default function ChatPanel({ documentText }) {
         try {
             const chatHistory = messages.slice(1).concat(userMsg);
             console.log("Sending chat request...", { messages: chatHistory, textLength: documentText?.length });
-            const res = await axios.post('http://localhost:5000/chat', {
+            const res = await axios.post(API_ENDPOINTS.CHAT, {
                 documentText,
                 messages: chatHistory
             });

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Settings, FileText, LayoutList } from 'lucide-react'
 import { toast } from 'sonner'
 import { useAuth } from '../context/AuthContext'
+import { API_ENDPOINTS } from '../api/api'
 
 /* ─── states ─────────────────────────────────────── */
 const S = { IDLE: 'idle', DRAG: 'drag', OPTIONS: 'options', PROCESSING: 'processing', ERROR: 'error' }
@@ -145,7 +146,7 @@ export default function UploadBox() {
         const formData = new FormData()
         formData.append('files', files[0])
         formData.append('files', files[1])
-        res = await axios.post('http://localhost:5000/compare', formData)
+        res = await axios.post(API_ENDPOINTS.COMPARE, formData)
         
         // Navigate to special comparison dashboard (or handle in Dashboard)
         navigate('/dashboard', { 
@@ -162,7 +163,7 @@ export default function UploadBox() {
         formData.append('outputStyle', outputStyle)
         formData.append('targetLanguage', selectedLanguage)
 
-        res = await axios.post('http://localhost:5000/upload', formData)
+        res = await axios.post(API_ENDPOINTS.UPLOAD, formData)
         
         const fileUrl = URL.createObjectURL(files[0]);
         navigate('/dashboard', {

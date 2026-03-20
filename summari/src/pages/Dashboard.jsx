@@ -7,6 +7,7 @@ import {
     Loader2, Brain
 } from 'lucide-react'
 import axios from 'axios'
+import { API_ENDPOINTS } from '../api/api'
 import LiquidBackground from '../components/LiquidBackground'
 import ChatPanel from '../components/ChatPanel'
 import PdfPreview from '../components/PdfPreview'
@@ -82,7 +83,7 @@ export default function Dashboard() {
         setAudioLoading(true);
         try {
             const textToSpeak = `${localSummary.title}. ${localSummary.overview}`;
-            const res = await axios.post('http://localhost:5000/audio', { text: textToSpeak }, { responseType: 'blob' });
+            const res = await axios.post(API_ENDPOINTS.AUDIO, { text: textToSpeak }, { responseType: 'blob' });
             const url = URL.createObjectURL(res.data);
             setAudioUrl(url);
         } catch (err) {
@@ -119,7 +120,7 @@ export default function Dashboard() {
     const handleGenerateQuiz = async () => {
         setIsGeneratingQuiz(true);
         try {
-            const response = await axios.post('http://localhost:5000/quiz', {
+            const response = await axios.post(API_ENDPOINTS.QUIZ, {
                 documentText: documentText,
                 difficultyLevel: quizConfig.difficulty,
                 numQuestions: quizConfig.numQuestions
